@@ -1,0 +1,44 @@
+schema: spec-driven
+
+context: |
+  Tech stack: Python ^3.8, Poetry, single-module package (wrapenvars/__init__.py)
+  Source: 4 functions for base64 encode/decode (set_str, get_str, get_dict, set_dict)
+  Dev tools: ruff (linter + formatter), mypy (type checker), pre-commit
+  Testing: no test runner, no test files — Strict TDD disabled
+  Conventions: ruff line-length 88, double quotes, google docstrings, mccabe complexity max 5
+
+testing:
+  strict_tdd: false
+  test_runner: none
+  test_command: ""
+  build_command: ""
+  coverage_available: false
+  coverage_command: ""
+  coverage_threshold: 0
+  quality:
+    linter:   { available: true, command: "ruff check --fix" }
+    type_checker: { available: true, command: "mypy wrapenvars" }
+    formatter: { available: true, command: "ruff format" }
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes
+  specs:
+    - Use Given/When/Then for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+  design:
+    - Include sequence diagrams for complex flows
+    - Document architecture decisions with rationale
+  tasks:
+    - Group by phase, use hierarchical numbering
+    - Keep tasks completable in one session
+  apply:
+    - Follow existing code patterns
+    tdd: false
+    test_command: ""
+  verify:
+    test_command: ""
+    build_command: ""
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive deltas

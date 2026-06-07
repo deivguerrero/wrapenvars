@@ -1,6 +1,6 @@
 [project]
 name = "wrapenvars"
-version = "0.1.0"
+version = "0.2.0"
 description = "encode/decode base64 strings"
 authors = [
     {name = "David Guerrero", email = "deivguerrero@gmail.com"},
@@ -28,6 +28,7 @@ dev = [
     "ruff>=0.15.16",
     "mypy>=2.1.0",
     "pre-commit>=4.6.0",
+    "pytest>=8.0",
 ]
 
 [tool.ruff]
@@ -38,6 +39,9 @@ target-version = "py312"
 select = ["E", "F", "I", "B", "Q", "S", "C4", "SIM", "TCH"]
 fixable = ["ALL"]
 ignore = ["B006", "B023"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]
 
 [tool.ruff.format]
 quote-style = "double"
