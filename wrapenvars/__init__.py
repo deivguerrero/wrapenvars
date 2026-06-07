@@ -1,7 +1,7 @@
 import base64
 import binascii
 import json
-from typing import Any
+from typing import Any, cast
 
 
 def set_str(stream: str) -> str:
@@ -15,7 +15,7 @@ def set_str(stream: str) -> str:
     """
     try:
         return base64.b64encode(stream.encode("utf-8")).decode("utf-8")
-    except (UnicodeError, TypeError):
+    except (UnicodeError, TypeError, AttributeError):
         pass
     return ""
 
@@ -31,7 +31,7 @@ def get_str(stream: str) -> str:
     """
     try:
         return base64.b64decode(stream.encode("utf-8")).decode("utf-8")
-    except (UnicodeError, binascii.Error):
+    except (UnicodeError, binascii.Error, AttributeError):
         pass
     return ""
 
@@ -46,7 +46,7 @@ def get_dict(stream: str) -> dict[str, Any]:
         Decoded dictionary, or empty dict on failure.
     """
     try:
-        return json.loads(get_str(stream))
+        return cast(dict[str, Any], json.loads(get_str(stream)))
     except json.JSONDecodeError:
         pass
     return {}
